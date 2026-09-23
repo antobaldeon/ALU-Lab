@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ALU Lab · Métodos numéricos</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <aside class="sidebar">
+            <a class="brand" href="#">
+                <span class="brand-icon">ALU</span>
+                <span>
+                    ALU Lab<small>LABORATORIO NUMÉRICO</small>
+                </span>
+                
+                <span class="badge">Doolittle</span>
+            </a>
+            <p class="nav-label">ESPACIO DE TRABAJO</p>
+            <nav aria-label="Navegación principal">
+                <button class="nav-item active" data-view="calculator" aria-current="page">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8M8 11h1m6 0h1m-8 4h1m6 0h1m-8 4h1m6 0h1"/></svg>
+                    Calculadora LU
+                </button>
+                <button class="nav-item" data-view="guide">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 12h8m-8 4 2 2 4-4"/></svg>
+                    Ejercicio resuelto
+                </button>
+                <button class="nav-item" data-view="method">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.01"/></svg>
+                    Más información
+                </button>
+            </nav>
+            <div class="sidebar-note">
+                <span class="status-dot"></span>
+                Aprende paso a paso
+                <p>
+                    De una matriz a su solución.<br>Explora cada etapa del cálculo.
+                </p>
+                <span class="formula">A = L · U</span>
+            </div>
+            <div class="sidebar-footer">
+                MÉTODOS NUMÉRICOS<span>Unidad II · Álgebra lineal</span>
+            </div>
+        </aside>
+        <div class="workspace">
+            <header class="topbar">
+                <span>
+                    Métodos numéricos <span class="breadcrumb">/</span>
+                    <strong id="pageName">Calculadora LU</strong>
+                </span>
+            </header>
+            <main>
+                <section data-page="calculator">
+                    <div class="page-heading">
+                        <div>
+                            <p class="eyebrow">ANALIZA · DESCOMPONE · RESUELVE</p>
+                            <h1>Un sistema. Cada paso claro.</h1>
+                            <p>Resuelve sistemas lineales mediante factorización LU y revisa el procedimiento.</p>
+                        </div>
+                        </div>
+                    <div class="workflow">
+                        <div>
+                            <span>01</span>
+                            <strong>Define tu sistema</strong>
+                            <small>Matriz A y vector b </small>
+                        </div>
+                        <div>
+                            <span>02</span>
+                            <strong>Descompón la matriz</strong>
+                            <small>Factores L y U</small>
+                        </div>
+                        <div>
+                            <span>03</span>
+                            <strong>Encuentra la solución</strong>
+                            <small>Sustitución y revisión</small>
+                        </div>
+                    </div>
+                    <section class="card">
+                        <div class="card-heading">
+                            <div>
+                                <p class="eyebrow">ENTRADA DE DATOS</p>
+                                <h2 class="icon-heading"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h7m6 0h3M4 17h3m6 0h7"/><circle cx="14" cy="7" r="3"/><circle cx="10" cy="17" r="3"/></svg>Configura tu sistema</h2>
+                            </div>
+                            <span class="pill">Ax = b</span>
+                        </div>
+                        <div class="controls">
+                            <label>
+                                Número de variables<input id="n" type="number" min="1" max="30" value="3">
+                            </label>
+                            <label>
+                                Límite permitido<input id="limit" type="number" min="1" max="30" value="10">
+                            </label>
+                            <button id="generate" class="secondary icon-button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18m6-18v18"/></svg>Generar sistema</button>
+                            <button id="example" class="text-button icon-button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4M14 3h7v7M21 3 10 14"/></svg>Cargar ejemplo</button>
+                        </div>
+                        <div id="editor"></div>
+                        <div class="actions">
+                            <span>La diagonal de L se fija en 1.</span>
+                            <button id="solve" class="icon-button">
+                                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 4 12 8-12 8z"/></svg>Resolver sistema
+                            </button>
+                        </div>
+                    </section>
+                    <section class="results-section">
+                        <div class="section-title">
+                            <h2 class="icon-heading"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3v17h17M9 16v-5m5 5V7m5 9V4"/></svg>Resultados del análisis</h2>
+                            <span>PRECISIÓN · 6 DECIMALES</span>
+                        </div>
+                        <div id="customOut" aria-live="polite">
+                            <div class="empty-state">
+                                <span>⌁</span>
+                                <h3>Todo listo para calcular</h3>
+                                <p>Introduce tus coeficientes o carga el ejemplo y pulsa «Resolver sistema».</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section data-page="guide" hidden>
+                    <div class="guide-hero">
+                        <div>
+                            <p class="eyebrow">EJERCICIO DE LA GUÍA · RESUELTO</p>
+                            <h1>
+                                Clúster de<br>microservicios
+                            </h1>
+                            <p>
+                                Una matriz, dos escenarios.<br>La solución completa, de principio a fin.
+                            </p>
+                        </div>
+                        <div class="hero-equation" aria-hidden="true">
+                            <span>A = LU</span>
+                            <small>
+                                DESCOMPONER UNA VEZ.<br>RESOLVER DOS VECES.
+                            </small>
+                        </div>
+                    </div>
+                    <div id="guideOut" aria-live="polite"></div>
+                </section>
+                <section data-page="method" hidden>
+                    <div class="page-heading">
+                        <div>
+                            <p class="eyebrow">FUNDAMENTOS</p>
+                            <h1>El método de Doolittle</h1>
+                            <p>Divide un problema en dos sistemas triangulares más sencillos.</p>
+                        </div>
+                    </div>
+                    <section class="card method">
+                        <span class="method-formula">A = L · U</span>
+                        <h2 class="icon-heading"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5C9 3 5 3 2 4v16c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1zm0 0v16"/></svg>¿Cómo funciona?</h2>
+                        <ol>
+                            <li>
+                                <strong>Factorización.</strong>
+                                Construye L triangular inferior con unos en su diagonal y U triangular superior.
+                            </li>
+                            <li>
+                                <strong>Sustitución hacia adelante.</strong>
+                                Resuelve Ly = b para encontrar el vector intermedio y.
+                            </li>
+                            <li>
+                                <strong>Sustitución hacia atrás.</strong>
+                                Resuelve Ux = y para obtener la solución x.
+                            </li>
+                        </ol>
+                        <div class="notice">Esta implementación no utiliza pivoteo. Si aparece un pivote cero o de magnitud menor que 10⁻¹², el cálculo se detiene; esto no implica necesariamente que el sistema no tenga solución.</div>
+                    </section>
+                </section>
+                <footer>
+                    ALU Lab <span>Factorización de Doolittle · Herramienta educativa</span>
+                </footer>
+            </main>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
