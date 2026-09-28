@@ -22,6 +22,7 @@
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="2" width="16" height="20" rx="3"/><path d="M8 6h8M8 11h1m6 0h1m-8 4h1m6 0h1m-8 4h1m6 0h1"/></svg>
                     Calculadora LU
                 </button>
+                <button class="nav-item" data-view="jacobi"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 7a9 9 0 0 0-15-2L2 8m0-5v5h5M4 17a9 9 0 0 0 15 2l3-3m0 5v-5h-5"/></svg>Calculadora Jacobi</button>
                 <button class="nav-item" data-view="guide">
                     <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 12h8m-8 4 2 2 4-4"/></svg>
                     Ejercicio resuelto
@@ -51,6 +52,29 @@
                 </span>
             </header>
             <main>
+                <section data-page="jacobi" hidden>
+                    <div class="page-heading"><div><p class="eyebrow">SESIÓN 7 · MÉTODOS ITERATIVOS</p><h1>Jacobi, iteración a iteración.</h1><p>Explora el balance de carga entre servidores o introduce tu propio sistema lineal.</p></div></div>
+                    <section class="card method">
+                        <h2>¿Cómo funciona el método de Jacobi?</h2>
+                        <p>Despeja cada variable usando la diagonal de A. En cada iteración, todas las variables se calculan con los valores de la iteración anterior, sin reutilizar valores recién calculados.</p>
+                        <p class="jacobi-formula">xᵢ⁽ᵏ⁺¹⁾ = (bᵢ − ∑ⱼ≠ᵢ aᵢⱼ xⱼ⁽ᵏ⁾) / aᵢᵢ</p>
+                        <ol><li><strong>Analiza la matriz.</strong> Es estrictamente diagonal dominante por filas si |aᵢᵢ| &gt; ∑ⱼ≠ᵢ |aᵢⱼ| en todas las filas. Esta condición garantiza la convergencia de Jacobi para cualquier vector inicial.</li><li><strong>Elige un punto de partida.</strong> La guía utiliza x⁽⁰⁾ = (0, 0, 0, 0)ᵀ. Aquí puedes modificarlo.</li><li><strong>Repite y compara.</strong> Usamos el error relativo global e = ‖x⁽ᵏ⁾ − x⁽ᵏ⁻¹⁾‖∞ / ‖x⁽ᵏ⁾‖∞. La norma infinito es el mayor valor absoluto de las componentes. Se detiene cuando e ≤ ε; ε = 0.0001 equivale a 0.01 %.</li></ol>
+                        <div class="notice">La dominancia estricta es suficiente, pero no necesaria: si no se cumple, este análisis no garantiza convergencia. Se requiere diagonal no nula. Si el vector nuevo es cero, el error es 0 cuando no hubo cambio e infinito en caso contrario. El residuo ‖Ax − b‖∞ permite comprobar la aproximación.</div>
+                    </section>
+                    <section class="card jacobi-card" id="jacobiInputs">
+                        <div class="card-heading"><div><p class="eyebrow">ENTRADA DE DATOS</p><h2>Configura tu sistema Jacobi</h2></div><span class="pill">Ax = b</span></div>
+                        <p>Ejemplo de la guía: cuatro servidores; x representa miles de peticiones por minuto.</p>
+                        <div class="controls">
+                            <label>Variables (1–30)<input id="jacobiN" type="number" min="1" max="30" value="4"></label>
+                            <label>Tolerancia relativa ε<input id="jacobiTolerance" type="number" min="0" step="any" value="0.0001"></label>
+                            <label>Máximo de iteraciones<input id="jacobiMax" type="number" min="1" max="1000" value="100"></label>
+                            <button id="jacobiGenerate" class="secondary">Generar sistema</button><button id="jacobiExample" class="text-button">Cargar ejemplo de la guía</button>
+                        </div>
+                        <div id="jacobiEditor"></div>
+                        <div class="actions"><span>Cada fila contiene A, b y el valor inicial x⁽⁰⁾.</span><button id="jacobiSolve">Resolver con Jacobi →</button></div>
+                    </section>
+                    <section class="results-section"><div class="section-title"><h2>Convergencia y resultados</h2></div><div id="jacobiOut" aria-live="polite"></div></section>
+                </section>
                 <section data-page="calculator">
                     <div class="page-heading">
                         <div>
@@ -170,5 +194,6 @@
             </main>
         </div>
         <script src="script.js"></script>
+        <script src="jacobi.js"></script>
     </body>
 </html>

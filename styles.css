@@ -42,6 +42,14 @@ button:focus-visible,a:focus-visible,input:focus-visible {
     display: none!important
 }
 
+.jacobi-card { margin-top: 24px }
+.jacobi-formula { padding: 18px; background: #f4f5fe; border-radius: 8px; overflow-x: auto; font-family: Cambria, Georgia, serif; font-size: 20px }
+.jacobi-table { overflow: auto; max-height: 480px }
+.jacobi-table table { width: 100%; white-space: nowrap }
+.jacobi-table th { padding: 12px 13px; text-align: right; background: #f4f5fe; position: sticky; top: 0; color: #526078 }
+#jacobiInputs input[data-jb] { background: #f0f2ff; border-color: #d9def7 }
+#jacobiInputs input[data-jx] { background: #f0faf6; border-color: #cde7db }
+
 .icon {
     width: 18px;
     height: 18px;
